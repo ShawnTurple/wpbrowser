@@ -7,13 +7,13 @@ ENV PATH /repo:${PATH}
 
 # Install required system packages
 RUN 	apt-get update && apt-get -y install \
-	git zlib1g-dev libssl-dev libpng-dev \
-        --no-install-recommends && apt-get clean && \
-        rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+			git zlib1g-dev libssl-dev libpng-dev \
+      --no-install-recommends && apt-get clean && \
+      rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install php extensions
 RUN 	docker-php-ext-install bcmath zip gd pdo_mysql mysqli; \
-	pecl install mongodb xdebug-2.6.0beta1 && \
+			pecl install mongodb xdebug-2.6.0beta1 && \
     	docker-php-ext-enable mongodb.so xdebug;
 
 # Configure php
@@ -23,7 +23,7 @@ RUN echo "date.timezone = UTC" >> /usr/local/etc/php/php.ini
 RUN curl -sS https://getcomposer.org/installer | php -- \
         --filename=composer \
         --install-dir=/usr/local/bin; \
-	composer global require --optimize-autoloader "hirak/prestissimo";
+		composer global require --optimize-autoloader "hirak/prestissimo";
 
 # Prepare application
 WORKDIR /repo
@@ -34,10 +34,10 @@ RUN 	composer install --prefer-dist --optimize-autoloader; \
 	ln -s /repo/vendor/bin/codecept /usr/local/bin/codecept; \
 	mkdir -p  /wordpress /project
 
-#RUN  sed -i -e "s/''\.env',/'\.\.\/wordpress\/wp-content\/\.env',/" /repo/vendor/lucatume/wp-browser/codeception.dist.yml
+RUN  sed -i -e "s/\.env/\.\.\/env\/\.env/" /repo/vendor/lucatume/wp-browser/codeception.dist.yml
 
 ADD Wpbrowser.php /repo/vendor/lucatume/wp-browser/src/Codeception/Template/
+WORKDIR /project
 
 ENTRYPOINT ["/repo/vendor/bin/codecept"]
-# Prepare host-volume working directory
-WORKDIR /project
+#ENTRYPOINT ["bash"]
