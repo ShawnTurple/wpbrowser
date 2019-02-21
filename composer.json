@@ -10,12 +10,11 @@
             "homepage":"http://codegyre.com"
         }
     ],
-    "minimum-stability": "RC",
+
 
     "require": {
-        "lucatume/wp-browser" : "^2.1",
-        "wp-coding-standards/wpcs": "^0.14.1",
-        "codeception/codeception" : "2.5.2",
+        "lucatume/wp-browser" : "^2.2",
+        "wp-coding-standards/wpcs": "~2.0",
         "lucatume/codeception-setup-local": "*",
         "jonnyw/php-phantomjs" : "*"
 
@@ -27,7 +26,7 @@
         "pda/pheanstalk": "~3.0",
         "flow/jsonpath": "~0.2",
         "predis/predis": "^1.0",
-        "squizlabs/php_codesniffer": "~2.0",
+        "squizlabs/php_codesniffer": "~3.3",
         "vlucas/phpdotenv": "~2.4",
         "symfony/process": ">=2.7 <5.0"
     },

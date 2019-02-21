@@ -7,7 +7,7 @@ ENV PATH /repo:${PATH}
 
 # Install required system packages
 RUN 	apt-get update && apt-get -y install \
-			git zlib1g-dev libssl-dev libpng-dev \
+			git zlib1g-dev libssl-dev libpng-dev  less vim \
       --no-install-recommends && apt-get clean && \
       rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -29,15 +29,26 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
 WORKDIR /repo
 
 ADD ./composer.json /repo/composer.json
+
 # Install vendor
 RUN 	composer install --prefer-dist --optimize-autoloader; \
 	ln -s /repo/vendor/bin/codecept /usr/local/bin/codecept; \
 	mkdir -p  /wordpress /project
 
 RUN  sed -i -e "s/\.env/\.\.\/env\/\.env/" /repo/vendor/lucatume/wp-browser/codeception.dist.yml
-
+ADD docker-entrypoint.sh /usr/local/bin
+ADD phpcs.xml /
 ADD Wpbrowser.php /repo/vendor/lucatume/wp-browser/src/Codeception/Template/
+
+RUN ln -s /repo/vendor/bin/phpcs /usr/local/bin/phpcs; \
+		ln -s /repo/vendor/bin/phpcbf /usr/local/bin/phpcbf; \
+		chmod +x /usr/local/bin/* ; \
+		chown -R www-data:www-data /repo;
+
 WORKDIR /project
 
-ENTRYPOINT ["/repo/vendor/bin/codecept"]
+USER www-data
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+#ENTRYPOINT ["/repo/vendor/bin/codecept"]
 #ENTRYPOINT ["bash"]
