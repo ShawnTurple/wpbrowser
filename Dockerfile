@@ -7,23 +7,23 @@ ENV PATH /repo:${PATH}
 
 # Install required system packages
 RUN 	apt-get update && apt-get -y install \
-			git zlib1g-dev libssl-dev libpng-dev  less vim \
-      --no-install-recommends && apt-get clean && \
-      rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+	git zlib1g-dev libssl-dev libpng-dev  less vim \
+	--no-install-recommends && apt-get clean && \
+	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install php extensions
 RUN 	docker-php-ext-install bcmath zip gd pdo_mysql mysqli; \
-			pecl install mongodb xdebug-2.6.0beta1 && \
-    	docker-php-ext-enable mongodb.so xdebug;
+	pecl install mongodb xdebug-2.6.0beta1 && \
+	docker-php-ext-enable mongodb.so xdebug;
 
 # Configure php
 RUN echo "date.timezone = UTC" >> /usr/local/etc/php/php.ini
 
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- \
-        --filename=composer \
-        --install-dir=/usr/local/bin; \
-		composer global require --optimize-autoloader "hirak/prestissimo";
+	--filename=composer \
+	--install-dir=/usr/local/bin; \
+	composer global require --optimize-autoloader "hirak/prestissimo";
 
 # Prepare application
 WORKDIR /repo
@@ -40,10 +40,13 @@ ADD docker-entrypoint.sh /usr/local/bin
 ADD phpcs.xml /
 ADD Wpbrowser.php /repo/vendor/lucatume/wp-browser/src/Codeception/Template/
 
-RUN ln -s /repo/vendor/bin/phpcs /usr/local/bin/phpcs; \
-		ln -s /repo/vendor/bin/phpcbf /usr/local/bin/phpcbf; \
-		chmod +x /usr/local/bin/* ; \
-		chown -R www-data:www-data /repo;
+RUN 	ln -s /repo/vendor/bin/phpcs /usr/local/bin/phpcs; \
+	ln -s /repo/vendor/bin/phpcbf /usr/local/bin/phpcbf; \
+	ln -s /repo/vendor/bin/phpdoc /usr/local/bin/phpdoc; \
+	ln -s /repo/vendor/bin/jsonlint /usr/local/bin/jsonlint; \
+	ln -s /repo/vendor/bin/validate-json /usr/local/bin/validate-json; \
+	chmod +x /usr/local/bin/* ; \
+	chown -R www-data:www-data /repo;
 
 WORKDIR /project
 
