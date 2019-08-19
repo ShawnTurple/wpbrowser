@@ -7,14 +7,14 @@ ENV PATH /repo:${PATH}
 
 # Install required system packages
 RUN 	apt-get update && apt-get -y install \
-	git zlib1g-dev libssl-dev libpng-dev  less vim \
+	git zlib1g-dev libssl-dev libpng-dev  less vim graphviz libicu-dev zlib1g-dev libxslt1-dev\
 	--no-install-recommends && apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install php extensions
-RUN 	docker-php-ext-install bcmath zip gd pdo_mysql mysqli; \
+RUN 	docker-php-ext-install bcmath zip gd pdo_mysql mysqli intl xsl; \
 	pecl install mongodb xdebug-2.6.0beta1 && \
-	docker-php-ext-enable mongodb.so xdebug;
+	docker-php-ext-enable mongodb.so xdebug ;
 
 # Configure php
 RUN echo "date.timezone = UTC" >> /usr/local/etc/php/php.ini

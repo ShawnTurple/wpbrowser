@@ -6,3 +6,6 @@
 #/repo/vendor/bin/phpcs -nps --colors --standard=Wordpress  --report-full=/project/.audit/phpcs-full.txt --report-summary=/project/.audit/phpcs-summary.txt /project
 /repo/vendor/bin/phpcs -nps --standard=/phpcs.xml --colors /project
 /bin/bash
+
+
+#/project/../wordpress/wp-content/.env
