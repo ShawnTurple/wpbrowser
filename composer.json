@@ -12,10 +12,9 @@
   ],
   "require": {
     "lucatume/wp-browser": "^2.2",
-    "wp-coding-standards/wpcs": "~2.0",
+    "wp-coding-standards/wpcs": "~2.2",
     "lucatume/codeception-setup-local": "*",
     "jonnyw/php-phantomjs": "*"
-   
   },
   "require-dev": {
     "monolog/monolog": "~1.8",
@@ -24,10 +23,10 @@
     "pda/pheanstalk": "~3.0",
     "flow/jsonpath": "~0.2",
     "predis/predis": "^1.0",
-    "squizlabs/php_codesniffer": "~3.3",
+    "squizlabs/php_codesniffer": "~3.5",
     "vlucas/phpdotenv": "~2.4",
     "symfony/process": ">=2.7 <5.0",
-    "phpdocumentor/phpdocumentor": "dev-master"
+    "phpdocumentor/phpdocumentor": "~2.9"
   },
   "autoload": {
     "psr-4": {
