@@ -2,10 +2,6 @@
 codecept() {
     codecept=$1
     cmd=${2:-run}
-    echo "cmd ${cmd} 2: ${2}"
-    if [ -z "${2}" ]; then
-        echo "parameter 2 is zero"
-    fi
     if [ "run" == "${cmd}" ] &&  [ -z "${2}" ]; then
         echo "default test"
         /repo/vendor/bin/codecept ${cmd} --report --html | tee /project/.audit/codecept.txt
@@ -20,11 +16,19 @@ phpcs() {
     /repo/vendor/bin/phpcs --config-set installed_paths /repo/vendor/wp-coding-standards/wpcs/
     /repo/vendor/bin/phpcs --config-set error_severity 1
     /repo/vendor/bin/phpcs -i
-    /repo/vendor/bin/phpcs -nps --standard=/phpcs.xml --colors --ignore=*/.phpdocs/*,*/tests/* /project
+    if [ -z "${2}" ]; then
+        /repo/vendor/bin/phpcs -nps --standard=/phpcs.xml --colors --ignore=*/.phpdocs/*,*/tests/* /project
+    else
+        /repo/vendor/bin/${@}
+    fi
 }
 
 phpcbf() {
-    /repo/vendor/bin/phpcbf -nps  --colors --ignore=*/.phpdocs/*,*/tests/* /project
+    if [ -z "${2}" ]; then
+        /repo/vendor/bin/phpcbf -nps  --colors --ignore=*/.phpdocs/*,*/tests/* /project
+    else
+        /repo/vendor/bin/${@}
+    fi
 }
 
 phpdocs() {
