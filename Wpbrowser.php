@@ -578,7 +578,7 @@ modules:
         - \\{$this->namespace}Helper\\{$actor}
     config:
         WPDb:
-            dsn: 'mysql:host=%TEST_SITE_DB_HOST%;dbname=%TEST_SITE_DB_NAME%'
+            dsn: 'bcgov_mysql:host=%TEST_SITE_DB_HOST%;dbname=%TEST_SITE_DB_NAME%'
             user: '%TEST_SITE_DB_USER%'
             password: '%TEST_SITE_DB_PASSWORD%'
             dump: 'tests/_data/dump.sql'
@@ -629,7 +629,7 @@ modules:
         - \\{$this->namespace}Helper\\{$actor}
     config:
         WPDb:
-            dsn: 'mysql:host=%TEST_SITE_DB_HOST%;dbname=%TEST_SITE_DB_NAME%'
+            dsn: 'bcgov_mysql:host=%TEST_SITE_DB_HOST%;dbname=%TEST_SITE_DB_NAME%'
             user: '%TEST_SITE_DB_USER%'
             password: '%TEST_SITE_DB_PASSWORD%'
             dump: 'tests/_data/dump.sql'
