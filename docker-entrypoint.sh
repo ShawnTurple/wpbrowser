@@ -17,15 +17,16 @@ phpcs() {
     /repo/vendor/bin/phpcs --config-set error_severity 1
     /repo/vendor/bin/phpcs -i
     if [ -z "${2}" ]; then
-        /repo/vendor/bin/phpcs -nps --standard=/phpcs.xml --colors --ignore=*/.phpdocs/*,*/tests/* /project
+        /repo/vendor/bin/phpcs -nps --standard=/phpcs.xml --colors --ignore=*/.phpdocs/*,*/tests/*,dist/* /project
     else
         /repo/vendor/bin/${@}
     fi
 }
 
 phpcbf() {
+    /repo/vendor/bin/phpcs --config-set installed_paths /repo/vendor/wp-coding-standards/wpcs/
     if [ -z "${2}" ]; then
-        /repo/vendor/bin/phpcbf -nps  --colors --ignore=*/.phpdocs/*,*/tests/* /project
+        /repo/vendor/bin/phpcbf -nps  --colors --ignore=*/.phpdocs/*,*/tests/*,dist/* /project
     else
         /repo/vendor/bin/${@}
     fi
@@ -40,8 +41,12 @@ mysql() {
 }
 
 composer() {
-    $1=-"update"
-    /usr/local/bin/composer $1
+   
+    if [ -z == "${2}" ]; then
+        /user/local/bin/composer update
+    else
+        /usr/local/bin/${@} 
+    fi
 }
 
 echo "Command $1 $2"
@@ -49,14 +54,14 @@ if [ "$1" == 'codecept' ]; then
     codecept $@
 elif [ "$1" == 'phpcs' ]; then
     echo "Checking php standards"
-    phpcs
+    phpcs $@
 elif [ "$1" == 'phpcbf' ]; then
     echo "Auto fixing standards"
-    phpcbf
+    phpcbf $@
     phpcs
 elif [ "$1" == 'docs' ]; then
     echo "Creating Phpdocs at .phpdocs"
-    phpdocs
+    phpdocs $@
 elif [ "$1" == 'bash' ]; then
     echo "Running bash into wpbrowser"
     /bin/bash
@@ -65,7 +70,7 @@ elif [ "$1" == 'mysql' ]; then
     mysql
 elif [ "$1" == 'composer' ]; then
     echo "Composer!!!"
-    composer $2
+    composer $@
 else
     codecept
     phpcs
