@@ -17,7 +17,7 @@ phpcs() {
     /repo/vendor/bin/phpcs --config-set error_severity 1
     /repo/vendor/bin/phpcs -i
     if [ -z "${2}" ]; then
-        /repo/vendor/bin/phpcs -nps --standard=/phpcs.xml --colors --ignore=*/.phpdocs/*,*/tests/*,dist/* /project
+        /repo/vendor/bin/phpcs -nps --standard=/phpcs.xml --colors --ignore=*/.phpdocs/*,*/tests/*,dist/*,vendor/* /project
     else
         /repo/vendor/bin/${@}
     fi
@@ -26,7 +26,7 @@ phpcs() {
 phpcbf() {
     /repo/vendor/bin/phpcs --config-set installed_paths /repo/vendor/wp-coding-standards/wpcs/
     if [ -z "${2}" ]; then
-        /repo/vendor/bin/phpcbf -nps  --colors --ignore=*/.phpdocs/*,*/tests/*,dist/* /project
+        /repo/vendor/bin/phpcbf -nps  --colors --ignore=*/.phpdocs/*,*/tests/*,dist/*,vendor/* /project
     else
         /repo/vendor/bin/${@}
     fi
