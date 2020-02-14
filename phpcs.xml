@@ -47,8 +47,10 @@
   	<rule ref="WordPress.WP.I18n.TextDomainMismatch"><severity>0</severity></rule>
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound"><severity>0</severity></rule>
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound"><severity>0</severity></rule>
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound"><severity>1</severity></rule>
 	<rule ref="WordPress.Files.FileName.InvalidClassFileName"><severity>0</severity></rule>
 	<rule ref="Squiz.Commenting.FunctionComment.SpacingAfterParamType"><severity>0</severity></rule>
+
 
 	<!-- gives warning if there is no domain after __('string', domain) -->
 	<rule ref="WordPress.WP.I18n.MissingArgDomain"><severity>0</severity></rule>
