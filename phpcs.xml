@@ -45,6 +45,7 @@
 	<rule ref="Squiz.Commenting.FileComment.Missing"><severity>0</severity></rule>
 	<rule ref="Squiz.Commenting.FileComment.SpacingAfterComment"><severity>0</severity></rule>
   	<rule ref="WordPress.WP.I18n.TextDomainMismatch"><severity>0</severity></rule>
+	<rule ref="WordPress.WhiteSpace.PrecisionAlignment.Found"><severity>0</severity></rule>
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound"><severity>0</severity></rule>
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound"><severity>0</severity></rule>
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound"><type>warning</type></rule>
