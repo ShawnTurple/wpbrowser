@@ -3,13 +3,18 @@ codecept() {
     codecept=$1
     cmd=${2:-run}
     if [ "run" == "${cmd}" ] &&  [ -z "${2}" ]; then
-        echo "default test"
-        /repo/vendor/bin/codecept ${cmd} --report --html | tee /project/.audit/codecept.txt
+        echo "Default test"
+        /repo/vendor/bin/codecept ${cmd} 
     else
         # just means than a custom codecept command was passed.
-        echo "custom test"
+        echo "Custom test"
         /repo/vendor/bin/${@}
     fi
+}
+
+codecept_report() {
+    echo "Report test"
+    /repo/vendor/bin/codecept run  --report --html | tee /project/.audit/codecept.txt
 }
 
 phpcs() {
@@ -72,9 +77,7 @@ elif [ "$1" == 'composer' ]; then
     echo "Composer!!!"
     composer $@
 else
-    codecept
-    phpcs
-    phpdocs
+    echo "Please use wputil --help for usage"
 fi
 
 
