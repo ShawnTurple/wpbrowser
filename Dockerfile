@@ -7,7 +7,7 @@ ENV PATH /repo:${PATH}
 
 # Install required system packages
 RUN apt-get update && apt-get -y install \
-	git zlib1g-dev libssl-dev libpng-dev  less vim graphviz libicu-dev zlib1g-dev libxslt1-dev mysql-client \
+	git zlib1g-dev libssl-dev libpng-dev  less vim graphviz libicu-dev zlib1g-dev libxslt1-dev mysql-client wget \
 	--no-install-recommends && apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
