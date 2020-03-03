@@ -4,17 +4,17 @@ codecept() {
     cmd=${2:-run}
     if [ "run" == "${cmd}" ] &&  [ -z "${2}" ]; then
         echo "Default test"
-        /repo/vendor/bin/codecept ${cmd} 
+        /repo/vendor/bin/codecept ${cmd} --coverage --coverage-html
     else
         # just means than a custom codecept command was passed.
         echo "Custom test"
-        /repo/vendor/bin/${@}
+        /repo/vendor/bin/${@} --coverage --coverage-html
     fi
 }
 
 codecept_report() {
     echo "Report test"
-    /repo/vendor/bin/codecept run  --report --html | tee /project/.audit/codecept.txt
+    /repo/vendor/bin/codecept run  --report --html --coverage --coverage-html | tee /project/.audit/codecept.txt
 }
 
 phpcs() {
@@ -22,7 +22,7 @@ phpcs() {
     /repo/vendor/bin/phpcs --config-set error_severity 1
     /repo/vendor/bin/phpcs -i
     if [ -z "${2}" ]; then
-        /repo/vendor/bin/phpcs -ps --standard=/phpcs.xml --colors --ignore=*/.phpdocs/*,*/tests/*,dist/*,vendor/* /project
+        /repo/vendor/bin/phpcs -ps --standard=/phpcs.xml --colors --ignore=*/.phpdocs/*,*/tests/*,dist/*,vendor/*,coverage/* /project
     else
         /repo/vendor/bin/${@}
     fi
@@ -31,7 +31,7 @@ phpcs() {
 phpcbf() {
     /repo/vendor/bin/phpcs --config-set installed_paths /repo/vendor/wp-coding-standards/wpcs/
     if [ -z "${2}" ]; then
-        /repo/vendor/bin/phpcbf -ps  --colors --ignore=*/.phpdocs/*,*/tests/*,dist/*,vendor/* /project
+        /repo/vendor/bin/phpcbf -ps  --colors --ignore=*/.phpdocs/*,*/tests/*,dist/*,vendor/*,coverage/* /project
     else
         /repo/vendor/bin/${@}
     fi
