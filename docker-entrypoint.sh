@@ -57,6 +57,8 @@ composer() {
 echo "Command $1 $2"
 if [ "$1" == 'codecept' ]; then
     codecept $@
+elif [ "$1" == 'codecept_report' ]; then
+    codecept_report
 elif [ "$1" == 'phpcs' ]; then
     echo "Checking php standards"
     phpcs $@
